@@ -272,7 +272,7 @@
         <ngcart-cart></ngcart-cart>
       </div>
       <div class="modal-footer">
-        <ngcart-checkout service="http" settings="/checkout.php">Checkout</ngcart-checkout>
+        <ngcart-checkout service="http" settings="">Checkout</ngcart-checkout>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
