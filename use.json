@@ -1,81 +1,122 @@
 {
-    "customSandwhich": [{
-        "Name": "Custom Sandwhich",
+    "premadeSandwhich": [
+        {
+        "Name": "Custom",
         "Ingredients": [{
             "Bread": {
                 "Type": [{
+                    "id" : 1,
                     "Name": "White",
-                    "Present": true,
-                    "Price": 6.95
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
+                    
                 }, {
+                    "id" : 2,
                     "Name": "Wheat",
-                    "Present": true,
-                    "Price": 6.95
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
+                    
                 }]
             }
         }, {
             "Meats": {
                 "Type": [{
+
                     "Name": "steak",
-                    "Present": true,
-                    "Price": 6.95
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "Chicken",
-                    "Present": true,
-                    "Price": 6.95
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }, {
             "Veggies": {
                 "Type": [{
-                    "Name": "cucumbers",
-                    "Present": true,
-                    "Price": 6.95
-                }, {
-                    "Name": "tomato",
+                    "Name": "steak",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
+                }, {
+                    "Name": "Chicken",
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
+                },{
+                    "Name": "steak",
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
+                }, {
+                    "Name": "Chicken",
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
+                },{
+                    "Name": "steak",
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
+                }, {
+                    "Name": "Chicken",
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }, {
             "Condiments": {
                 "Type": [{
                     "Name": "sauce1",
-                    "Present": true,
-                    "Price": 6.95
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "lemon sauce",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }],
         "Price": 6.49
-    }],
-    "premadeSandwhich": [{
+        },  
+        {
         "Name": "Ya Boy",
         "Ingredients": [{
             "Bread": {
                 "Type": [{
+                    "id" : 1,
                     "Name": "White",
                     "Present": true,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }, {
+                    "id" : 2,
                     "Name": "Wheat",
-                    "Present": true,
-                    "Price": 6.95
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }, {
             "Meats": {
                 "Type": [{
+
                     "Name": "steak",
-                    "Present": true,
-                    "Price": 6.95
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "Chicken",
                     "Present": true,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }, {
@@ -83,11 +124,13 @@
                 "Type": [{
                     "Name": "steak",
                     "Present": true,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "Chicken",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }, {
@@ -95,11 +138,13 @@
                 "Type": [{
                     "Name": "sauce1",
                     "Present": true,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "lemon sauce",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }],
@@ -111,11 +156,13 @@
                 "Type": [{
                     "Name": "White",
                     "Present": true,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "Wheat",
-                    "Present": true,
-                    "Price": 6.95
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }, {
@@ -123,11 +170,13 @@
                 "Type": [{
                     "Name": "steak",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "Chicken",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }, {
@@ -135,11 +184,13 @@
                 "Type": [{
                     "Name": "steak",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "Chicken",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }, {
@@ -147,11 +198,13 @@
                 "Type": [{
                     "Name": "sauce1",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "lemon sauce",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }],
@@ -163,11 +216,13 @@
                 "Type": [{
                     "Name": "White",
                     "Present": true,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "Wheat",
-                    "Present": true,
-                    "Price": 6.95
+                    "Present": false,
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }, {
@@ -175,11 +230,13 @@
                 "Type": [{
                     "Name": "steak",
                     "Present": true,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "Chicken",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }, {
@@ -187,11 +244,13 @@
                 "Type": [{
                     "Name": "steak",
                     "Present": true,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "Chicken",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }, {
@@ -199,11 +258,13 @@
                 "Type": [{
                     "Name": "sauce1",
                     "Present": true,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }, {
                     "Name": "lemon sauce",
                     "Present": false,
-                    "Price": 6.95
+                    "Price": 6.95,
+                    "Double": false
                 }]
             }
         }],

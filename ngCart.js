@@ -27,7 +27,7 @@ angular.module('ngCart', ['ngCart.directives'])
 
     }])
 
-    .service('ngCart', ['$rootScope', '$window', 'ngCartItem', 'store', function ($rootScope, $window, ngCartItem, store) {
+    .service('ngCart', ['$rootScope',  'ngCartItem', 'store', function ($rootScope, ngCartItem, store) {
 
         this.init = function(){
             this.$cart = {
@@ -214,10 +214,10 @@ angular.module('ngCart', ['ngCart.directives'])
 
             // Create Unique ID for each item
             // Get Milliseconds
-            var timestamp = new Date().getUTCMilliseconds();
+            //var timestamp = new Date().getUTCMilliseconds();
 
              //Append timestamp var with id var to create unique id everytime somebody clicks add to cart. 
-            if (id)  this._id = id + timestamp;
+            if (id)  this._id = id;
             else {
                 $log.error('An ID must be provided');
             }
@@ -522,9 +522,9 @@ angular.module('ngCart.fulfilment', [])
 
             
 
-            return $http.post(settings.url,
-               { data: ngCart.toObject(), options: settings.options});
-        
+            //return $http.post(settings.url,
+              // { data: ngCart.toObject(), options: settings.options});
+            
 
 
 
