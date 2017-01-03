@@ -32,7 +32,7 @@
 		   	$scope.preMade = response.data.premadeSandwhich;
 		   	$scope.customMade = response.data.customSandwhich;
 
-        	console.log($scope.preMade);
+        console.log($scope.preMade);
 
 		   	// Grab data when user is ready to checkout
 	        $scope.updateFinalOrder= function (postData){
@@ -41,16 +41,25 @@
 	        }
         
 	        $scope.showAction = function (id){
-	        	//id testing -rm
-				console.log(id);
-	          	// Grab data after user presses order
-	          	var postData = JSON.stringify(ngCart['$cart']['items']);
-	          	//console.log(postData);
-	          	// Make Data usable with php form
-	          	$scope.postData = postData;
-	          	//data testing -rm
-	          	console.log($scope.postData);
-			}
+                //Check if user selected more than 1 meat, run a for loop until we reach ingredients -> and seperate by meat only since that is what will be charged. 
+                  var preData = ngCart['$cart']['items'];
+                  //console.log(preData);
+                  for (var j = 0; j < preData.length; j++){
+                    console.log(preData[j]);
+                  }
+                      //if yes, add price of single meat td data
+                  
+
+
+    	          	// Grab data after user presses order
+    	          	var postData = JSON.stringify(ngCart['$cart']['items']);
+                  
+                  
+    	          	// Make Data usable with php form
+    	          	$scope.postData = postData;
+    	          	//data testing -rm
+    	          	//console.log($scope.postData);
+    			}
 
 		   });
 
@@ -186,14 +195,6 @@
     </div>
   </div>
 
-<!--Begin PHP Form-->
-<form  class="simple-form" action="checkout.php" method="post">
-    <input type="text" name="name" required/><br />
-    <input type="email" name="email" required/><br />
-    <input type="text" style="display: none;" name="information" ng-model="postData" value="postData">
-    <input type="submit" value="Submit" />
-  </form>
-
 
 <!-- SCript for Displaying total order summary -->
 <script type="text/ng-template" id="template/ngCart/cart.html">
@@ -300,6 +301,13 @@
       </div>
       <div class="modal-body">
         <ngcart-cart></ngcart-cart>
+        <!--Begin Form For User Data -->
+        <form  class="simple-form" action="checkout.php" method="post">
+            <label for="name"> Name: <input type="text" name="name" required/></label><br />
+            <label for="email"> Email: <input type="email" name="email" required/></label><br />
+            <input type="text" style="display: none;" name="information" ng-model="postData" value="postData">
+            <input type="submit" value="Submit" />
+          </form>
       </div>
       <div class="modal-footer">
         <ngcart-checkout service="http" settings>Checkout</ngcart-checkout>
