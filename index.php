@@ -32,7 +32,6 @@
 		   	$scope.preMade = response.data.premadeSandwhich;
 		   	$scope.customMade = response.data.customSandwhich;
 
-        console.log($scope.preMade);
 
 		   	// Grab data when user is ready to checkout
 	        $scope.updateFinalOrder= function (postData){
@@ -44,8 +43,44 @@
                 //Check if user selected more than 1 meat, run a for loop until we reach ingredients -> and seperate by meat only since that is what will be charged. 
                   var preData = ngCart['$cart']['items'];
                   //console.log(preData);
+
+                  //Begin to loop items in cart to check for multiples
                   for (var j = 0; j < preData.length; j++){
-                    console.log(preData[j]);
+                    
+                    //remove console
+                    var initialLayer = preData[j];
+                    //console.log(initialLayer);
+                    
+                    //remove console
+                    var dataLayer = preData[j]._data;
+                    //console.log(dataLayer);
+
+                    //begin for looping through data array in cart
+                    for (var k = 0; k < dataLayer.length; k++){
+                      
+                      //general variable - add category in which you want to loop
+                      var meatLayer = dataLayer[k];
+
+                      //begin accessing individual meats
+                      if(meatLayer.Meats){
+                        var indMeat = meatLayer.Meats.Type;
+                        //console.log(meatLayer.Meats.Type);
+
+                        for(var l = 0; l < indMeat.length; l++){
+                          var indMeatTrue = indMeat[l].Double;
+                          console.log(indMeatTrue);
+
+
+
+                        }
+                        
+                      }
+
+                     
+                      
+                    }
+                  
+
                   }
                       //if yes, add price of single meat td data
                   
@@ -239,7 +274,7 @@
       <tr ng-repeat="item in ngCart.getCart().items track by $index">
         <td><span ng-click="ngCart.removeItemById(item.getId())" class="glyphicon glyphicon-remove"></span></td>
 
-        <td>{{ item.getName() }}</td>
+        <td>{{ item.getName() }} <span id="#"></span></td>
         <td><!-- <span class="glyphicon glyphicon-minus" ng-class="{'disabled':item.getQuantity()==1}"
         ng-click="item.setQuantity(-1, true)"></span> -->&nbsp;&nbsp;
         {{ item.getQuantity() | number }}&nbsp;&nbsp;
