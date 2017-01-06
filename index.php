@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>lets try</title>
-
-	<!-- LOAD BOOTSTRAP CSS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<title>Final Cart</title>
 
 
 	<!-- LOAD JQUERY -->
@@ -12,9 +9,17 @@
 
 	<!-- LOAD ANGULAR -->
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+
+  <!-- LOAD Libraries -->
 	<script type="text/javascript" src="ngCart.js"></script>
+  <script type="text/javascript" src="js/dropdownLayer.js"></script>
 
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- LOAD BOOTSTRAP CSS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="css/style.css">
 
 	<script type="text/javascript">
 		
@@ -30,7 +35,7 @@
 
 		   	// First level of JSON DATA, assign the general categories to variables
 		   	$scope.preMade = response.data.premadeSandwhich;
-		   	$scope.customMade = response.data.customSandwhich;
+
 
 
 		   	// Grab data when user is ready to checkout
@@ -115,120 +120,156 @@
 		}]);
 	</script>
 
-
-	
 </head>
+
+
 <body ng-app="order">
 
-<!--Display Cart Summary-->
 <div ng-controller="ShopCartCtrl">
-<div class="well text-center">
-	<ngcart-summary></ngcart-summary>
-	<button type="button" data-toggle="modal" data-target="#modaltest" ng-click="updateFinalOrder(postData)">Checkout</button>
+  <!-- Navigation -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" style="background-color: #fff;">
+      <div class="container">
+          <div class="navbar-header">
+             <!--  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+              </button> -->
+              <p style="margin-bottom: 0px; font-size: 16px; font-weight: bold;">Pick up Store: </p>
+              <span style="color: #8c8c48;">Store</span>
+          </div>
+          
+          <div class=" navbar-header pull-right">
+                  <p style="margin-bottom: 0px; font-size: 16px; font-weight: bold;">Cart Total: <span><ngcart-summary></ngcart-summary></span></p>
+                  <button class="btn btn navbar-btn" style="background-color: #8c8c48; color: #fff; border-radius: 0px; margin-top: 0px;" data-toggle="modal" data-target="#modaltest" ng-click="updateFinalOrder(postData)">CHECKOUT ></button>
+                  <!-- Script for Displaying total order summary -->
+                  <script type="text/ng-template" id="template/ngCart/summary.html">
+                    <span class="">{{ ngCart.getTotalItems() }}
+                      <ng-pluralize count="ngCart.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize>
+                      {{ ngCart.totalCost() | currency }}
+                    </span>
+                  </script>
+          </div>
+      </div>
+  </nav>
+
+
+<!-- Intro to Page -->
+<div style="width:100%; text-align: center;">
+        <img src="images/logo.png" style="text-align: center; width: 200px; ">    
+    </div>
+<div style="width: 100%; height: 28px; border-bottom: 1px solid #9F834D; text-align: center; color:#9F834D; margin-bottom: 30px; ">
+  <span style="font-size: 40px; background-color: #e9e0c7; padding: 0 10px;">
+    Order For Pickup <!--Padding? is optional-->
+  </span>
 </div>
 
-  
 
 
-<!-- SCript for Displaying total order summary -->
-<script type="text/ng-template" id="template/ngCart/summary.html">
-  <span class="">{{ ngCart.getTotalItems() }}
-    <ng-pluralize count="ngCart.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize>
-    <br />{{ ngCart.totalCost() | currency }}
-  </span>
-</script>
+<div class="container">
+  <div class="row">
 
 
-<!-- Get the Sandwhich information right-->
+         <div class="col-md-3" ng-repeat="customWhich in preMade">
+          <img class="img-responsive" src="http://66.media.tumblr.com/tumblr_l6m17yjpBJ1qz4ueho1_500.png"  alt="Frazier Farms sandwiches">
+                <h3 style="color: #8a6b24; text-align: center;">
+                  {{customWhich.Name}}
+                </h3>
+                <p>Sandwhich Description that includes current items.</p>
+                <h3 style="color: #8a6b24; text-align: center;">
+                  {{customWhich.Price}}
+                </h3>
+                <div class="top">
+                    <h4 style="padding: 0px; margin: 0px; margin-top: 3px;">Customize Sandwhich</h4>
+                </div>
+          <div class="js-description">
+            <div>
+              <div>
+                <span ng-repeat="customWhichCategory in customWhich.Ingredients">
+                  <ul ng-repeat="customWhichCategoryFinal in customWhichCategory.Bread">
+                    Pick 1 Bread:
+                    <li ng-repeat="customWhichBread in customWhichCategoryFinal">
+                      {{customWhichBread.Name}}
+                      {{customWhichBread.Present}} 
+                            <input ng-model="customWhichBread.Present" ng-click="updateSelection($index, customWhichCategoryFinal)" type="checkbox" />
+                    </li>
+
+                  </ul>
+                  <ul ng-repeat="customWhichCategoryFinal in customWhichCategory.Meats">
+                    Pick a Meat Pick 1:
+                    <li ng-repeat="customWhichMeat in customWhichCategoryFinal">
+                      {{customWhichMeat.Name}}
+                      {{customWhichMeat.Present}}
+                      <input type="checkbox" name="" ng-model="customWhichMeat.Present" ng-change="stateChanged()" ng-clicked="">
+
+                          <!-- Double: 
+                            {{customWhichMeat.Double }} -->
+                            <!-- <input type="checkbox" name="" ng-model="customWhichMeat.Double"> -->
+                    </li>
+                  </ul>
+                  <ul ng-repeat="customWhichCategoryFinal in customWhichCategory.Veggies ">
+                    Pick some Veggies Pick 4:
+                    <li ng-repeat="customWhichVeggies in customWhichCategoryFinal">
+                      {{customWhichVeggies.Name}}
+                      {{customWhichVeggies.Present}}
+                      <input type="checkbox" name="" ng-model="customWhichVeggies.Present" class="single-checkbox"><br>
+                    </li>
+                  </ul>
+                  <ul ng-repeat="customWhichCategoryFinal in customWhichCategory.Condiments">
+                    Pick some Condiments: Pick 3
+                    <li ng-repeat="customWhichCond in customWhichCategoryFinal ">
+                      {{customWhichCond.Name}}
+                      {{customWhichCond.Present}}
+                      <input type="checkbox" name="" ng-model="customWhichCond.Present"><br>
+                    </li>
+                  </ul>
+              </span> 
+            <ngcart-addtocart id="{{customWhich.+$index+1}}" name="{{customWhich.Name}}"  data="customWhich.Ingredients" price="{{customWhich.Price}}" quantity="1" quantity-max="5" ng-click="showAction(customWhich.+$index+1)">Add to Cart</ngcart-addtocart>
+              </div>
+              <!-- Show Sand which Build -->
+              <div >
+                <h3>Your Sandwhich Details</h3>
+                <div  ng-repeat="customWhichCategory in customWhich.Ingredients" >
+                <hr>
+                  <span ng-repeat="customWhichCategoryFinal in customWhichCategory.Bread">
+                    Bread: 
+                    <p ng-repeat="customWhichSingle in customWhichCategoryFinal | filter: {'Present': true}: true">
+                    {{customWhichSingle.Name}} 
+                    </p>
+                  </span>
+                
+                  <span ng-repeat="customWhichCategoryFinal in customWhichCategory.Meats">
+                    Meats:
+                    <p ng-repeat="customWhichSingle in customWhichCategoryFinal | filter: {'Present': true}: true">
+                       {{customWhichSingle.Name}}<span ng-repeat="customWhichSingle in customWhichCategoryFinal | filter: {'Double': true}: true "> + Double</span>
+                        </p>
+                  </span>
+                  <span ng-repeat="customWhichCategoryFinal in customWhichCategory.Veggies">
+                    Veggies: 
+                    <p ng-repeat="customWhichSingle in customWhichCategoryFinal | filter: {'Present': true}: true">
+                    {{customWhichSingle.Name}}</p>
+                  </span>
+                  <span ng-repeat="customWhichCategoryFinal in customWhichCategory.Condiments">
+                    Condiments:
+                    <p ng-repeat="customWhichSingle in customWhichCategoryFinal | filter: {'Present': true}: true">
+                    {{customWhichSingle.Name}}</p>
+                  </span>
 
 
-<h2>Choose our Premade Sandwhiches</h2>
-  <div class="row text-center">
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        
 
 
-    <div class="col-lg-4 col-md-4 col-xs-6 " ng-repeat="customWhich in preMade">
-      <img src="https://placehold.it/262x150" alt="image" />
-      <h4>{{customWhich.Name}}</h4>
-      <p>{{customWhich.Price}}</p>
-      <div>
-      	<div class="col-md-6">
-      		<span ng-repeat="customWhichCategory in customWhich.Ingredients">
-
-			<ul ng-repeat="customWhichCategoryFinal in customWhichCategory.Bread">
-				Pick 1 Bread:
-				<li ng-repeat="customWhichBread in customWhichCategoryFinal">
-					{{customWhichBread.Name}}
-					{{customWhichBread.Present}} 
-          			<input ng-model="customWhichBread.Present" ng-click="updateSelection($index, customWhichCategoryFinal)" type="checkbox" />
-				</li>
-
-			</ul>
-			<ul ng-repeat="customWhichCategoryFinal in customWhichCategory.Meats">
-				Pick a Meat Pick 1:
-				<li ng-repeat="customWhichMeat in customWhichCategoryFinal">
-					{{customWhichMeat.Name}}
-					{{customWhichMeat.Present}}
-					<input type="checkbox" name="" ng-model="customWhichMeat.Present" ng-change="stateChanged()" ng-clicked="">
-
-         			<!-- Double: 
-          			{{customWhichMeat.Double }} -->
-          			<!-- <input type="checkbox" name="" ng-model="customWhichMeat.Double"> -->
-				</li>
-			</ul>
-			<ul ng-repeat="customWhichCategoryFinal in customWhichCategory.Veggies ">
-				Pick some Veggies Pick 4:
-				<li ng-repeat="customWhichVeggies in customWhichCategoryFinal">
-					{{customWhichVeggies.Name}}
-					{{customWhichVeggies.Present}}
-					<input type="checkbox" name="" ng-model="customWhichVeggies.Present" class="single-checkbox"><br>
-				</li>
-			</ul>
-			<ul ng-repeat="customWhichCategoryFinal in customWhichCategory.Condiments">
-				Pick some Condiments: Pick 3
-				<li ng-repeat="customWhichCond in customWhichCategoryFinal ">
-					{{customWhichCond.Name}}
-					{{customWhichCond.Present}}
-					<input type="checkbox" name="" ng-model="customWhichCond.Present"><br>
-				</li>
-			</ul>
-		</span>	
-		<ngcart-addtocart id="{{customWhich.+$index+1}}" name="{{customWhich.Name}}"  data="customWhich.Ingredients" price="{{customWhich.Price}}" quantity="1" quantity-max="5" ng-click="showAction(customWhich.+$index+1)">Add to Cart</ngcart-addtocart>
-      	</div>
-      	<!-- Show Sand which Build -->
-      	<div class="col-md-6">
-      		<h3>Your Sandwhich Details</h3>
-      		<div  ng-repeat="customWhichCategory in customWhich.Ingredients" >
-      		<hr>
-      			<span ng-repeat="customWhichCategoryFinal in customWhichCategory.Bread">
-      				Bread: 
-      				<p ng-repeat="customWhichSingle in customWhichCategoryFinal | filter: {'Present': true}: true">
-      				{{customWhichSingle.Name}} 
-      				</p>
-      			</span>
-      		
-      			<span ng-repeat="customWhichCategoryFinal in customWhichCategory.Meats">
-      				Meats:
-      				<p ng-repeat="customWhichSingle in customWhichCategoryFinal | filter: {'Present': true}: true">
-      				   {{customWhichSingle.Name}}<span ng-repeat="customWhichSingle in customWhichCategoryFinal | filter: {'Double': true}: true "> + Double</span>
-              		</p>
-      			</span>
-      			<span ng-repeat="customWhichCategoryFinal in customWhichCategory.Veggies">
-      				Veggies: 
-      				<p ng-repeat="customWhichSingle in customWhichCategoryFinal | filter: {'Present': true}: true">
-      				{{customWhichSingle.Name}}</p>
-      			</span>
-      			<span ng-repeat="customWhichCategoryFinal in customWhichCategory.Condiments">
-      				Condiments:
-      				<p ng-repeat="customWhichSingle in customWhichCategoryFinal | filter: {'Present': true}: true">
-      				{{customWhichSingle.Name}}</p>
-      			</span>
-
-
-      		</div>
-      	</div>
-      </div>
     </div>
   </div>
+</div>
+
 
 
 <!-- SCript for Displaying total order summary -->
@@ -363,13 +404,13 @@ $(document).ready(function () {
 	  $('#myInput').focus()
 	});
 
+  //test to see if it works
 	var limit = 3;
 	$('input.single-checkbox').on('change', function(evt) {
 	   if($(this).siblings(':checked').length >= limit) {
 	       this.checked = false;
 		}
 	});
-
 
 
 
