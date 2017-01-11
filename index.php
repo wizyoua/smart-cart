@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,38 +33,31 @@
 		   	$scope.preMade = response.data.premadeSandwhich;
 		   	$scope.customMade = response.data.customSandwhich;
 
-        console.log($scope.preMade);
-
-		   	// Grab data when user is ready to checkout
-	        $scope.updateFinalOrder= function (postData){
-	          // Grab data after user presses order
-	          //location.reload();
-	        }
-        
-	        $scope.showAction = function (id){
-                //Check if user selected more than 1 meat, run a for loop until we reach ingredients -> and seperate by meat only since that is what will be charged. 
-                  var preData = ngCart['$cart']['items'];
-                  //console.log(preData);
-                  for (var j = 0; j < preData.length; j++){
-                    console.log(preData[j]);
-                  }
-                      //if yes, add price of single meat td data
-                  
+         // Grab data when user is ready to checkout
+          $scope.showAction = function (id){
+            //Check if user selected more than 1 meat, run a for loop until we reach ingredients -> and seperate by meat only since that is what will be charged. 
+              var preData = ngCart['$cart']['items'];
+              
+              // Grab data after user presses order
+              var postData = JSON.stringify(ngCart['$cart']['items']); 
+              console.log(postData);
+              $scope.postData = postData;
+              // for (var j = 0; j < preData.length; j++){
+              //   console.log(preData[j]);
+              // }
+              //if yes, add price of single meat td data
+              
 
 
-    	          	// Grab data after user presses order
-    	          	var postData = JSON.stringify(ngCart['$cart']['items']);
-                  
-                  
-    	          	// Make Data usable with php form
-    	          	$scope.postData = postData;
-    	          	//data testing -rm
-    	          	//console.log($scope.postData);
-    			}
-
+                             
+              // Make Data usable with php form
+              //this.postData = postData;
+              //console.log(this.postData);
+              //data testing -rm
+              }
 		   });
 
-      //
+      //make only 1 checkbox selectale for Bread Section
       $scope.updateSelection = function(position, entities) {
         console.log(entities);
         angular.forEach(entities, function(subscription, index) {
@@ -73,7 +67,7 @@
         });
       }
 
-
+   
 
 			ngCart.setTaxRate(7.5);
 			ngCart.setShipping(0.00);
@@ -124,7 +118,8 @@
 				<li ng-repeat="customWhichBread in customWhichCategoryFinal">
 					{{customWhichBread.Name}}
 					{{customWhichBread.Present}} 
-          			<input ng-model="customWhichBread.Present" ng-click="updateSelection($index, customWhichCategoryFinal)" type="checkbox" />
+          			<input ng-
+                model="customWhichBread.Present" ng-click="updateSelection($index, customWhichCategoryFinal)" type="checkbox" />
 				</li>
 
 			</ul>
@@ -261,7 +256,22 @@
 
 
 
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -288,8 +298,6 @@
 
 
 
-
-
 <div class="modal fade" id="modaltest">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -305,16 +313,22 @@
         <form  class="simple-form" action="checkout.php" method="post">
             <label for="name"> Name: <input type="text" name="name" required/></label><br />
             <label for="email"> Email: <input type="email" name="email" required/></label><br />
-            <input type="text" style="display: none;" name="information" ng-model="postData" value="postData">
+            <input type="text" style="" name="information" ng-model="postData" >
             <input type="submit" value="Submit" />
           </form>
       </div>
       <div class="modal-footer">
-        <ngcart-checkout service="http" settings>Checkout</ngcart-checkout>
+        <ngcart-checkout service="log" settings>Checkout</ngcart-checkout>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+</div>
+
+
+
+
+
 
 
 
