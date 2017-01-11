@@ -9,7 +9,7 @@ if(isset($_POST['information'])){ $info = $_POST['information']; }
 print_r($info);
 
 $new = json_decode($info);
-//var_dump($new);
+var_dump($new);
 
 
 ?>
